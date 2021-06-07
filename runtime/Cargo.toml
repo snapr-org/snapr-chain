@@ -1,11 +1,14 @@
 [package]
-authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
+authors = [
+    'Substrate DevHub <https://github.com/substrate-developer-hub>',
+    'snapr contributors <https://github.com/snapr-org/snapr/graphs/contributors>'
+]
 edition = '2018'
-homepage = 'https://substrate.dev'
+homepage = 'https://snapr.org'
 license = 'Unlicense'
-name = 'node-template-runtime'
-repository = 'https://github.com/substrate-developer-hub/substrate-node-template/'
-version = '3.0.0'
+name = 'snapr-runtime'
+repository = 'https://github.com/snapr-org/snapr'
+version = '0.0.1'
 
 [package.metadata.docs.rs]
 targets = ['x86_64-unknown-linux-gnu']

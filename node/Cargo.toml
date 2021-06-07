@@ -1,16 +1,16 @@
 [package]
-authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
+authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>', 'snapr contributors <https://github.com/snapr-org/snapr/graphs/contributors>']
 build = 'build.rs'
-description = 'A fresh FRAME-based Substrate node, ready for hacking.'
+description = 'universal basic income on substrate'
 edition = '2018'
-homepage = 'https://substrate.dev'
+homepage = 'https://snapr.org'
 license = 'Unlicense'
-name = 'node-template'
-repository = 'https://github.com/substrate-developer-hub/substrate-node-template/'
-version = '3.0.0'
+name = 'snapr'
+repository = 'https://github.com/snapr-org/snapr'
+version = '0.0.1'
 
 [[bin]]
-name = 'node-template'
+name = 'snapr'
 
 [package.metadata.docs.rs]
 targets = ['x86_64-unknown-linux-gnu']
@@ -52,8 +52,8 @@ sp-transaction-pool = {version = '3.0.0', git = 'https://github.com/paritytech/s
 substrate-frame-rpc-system = {version = '3.0.0', git = 'https://github.com/paritytech/substrate.git', tag = 'monthly-2021-05'}
 
 # local dependencies
-node-template-runtime = {version = '3.0.0', path = '../runtime'}
+snapr-runtime = {version = '0.0.1', path = '../runtime'}
 
 [features]
 default = []
-runtime-benchmarks = ['node-template-runtime/runtime-benchmarks']
+runtime-benchmarks = ['snapr-runtime/runtime-benchmarks']
