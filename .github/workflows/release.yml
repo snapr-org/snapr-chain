@@ -1,4 +1,5 @@
 ---
+# todo: refactor with build matrix and sccache (see: https://www.infinyon.com/blog/2021/04/github-actions-best-practices)
 name: release
 on:
   push:
@@ -88,9 +89,9 @@ jobs:
     - name: release
       run: make release
     - name: strip
-      run: strip target/release/snapr
+      run: strip target/release/snapr-node
     - name: rename
-      run: mv target/release/snapr target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
+      run: mv target/release/snapr-node target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
     - name: publish
       uses: softprops/action-gh-release@v1
       env:
