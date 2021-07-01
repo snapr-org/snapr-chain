@@ -1,7 +1,7 @@
 [package]
-name = "reef-primitives"
+name = "snapr-primitives"
 version = "0.7.3"
-authors = ["Reef Developers"]
+authors = ["snapr developers"]
 edition = "2018"
 
 [dependencies]

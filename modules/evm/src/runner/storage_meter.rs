@@ -180,7 +180,7 @@ mod tests {
 	use super::*;
 	use frame_support::{assert_err, assert_ok};
 
-	const ALICE: H160 = H160::repeat_byte(11);
+	const TRILLIAN: H160 = H160::repeat_byte(11);
 	const CONTRACT: H160 = H160::repeat_byte(22);
 	const CONTRACT_2: H160 = H160::repeat_byte(33);
 	const CONTRACT_3: H160 = H160::repeat_byte(44);
@@ -195,8 +195,8 @@ mod tests {
 				storages: Default::default(),
 				reserves: Default::default(),
 			};
-			val.storages.insert(ALICE, 0);
-			val.reserves.insert(ALICE, 0);
+			val.storages.insert(TRILLIAN, 0);
+			val.reserves.insert(TRILLIAN, 0);
 			val.storages.insert(CONTRACT, 0);
 			val.reserves.insert(CONTRACT, 0);
 			val.storages.insert(CONTRACT_2, 0);
@@ -212,12 +212,12 @@ mod tests {
 			if limit == 0 {
 				return Ok(());
 			}
-			let val = self.storages.get_mut(&ALICE).ok_or("error")?;
+			let val = self.storages.get_mut(&TRILLIAN).ok_or("error")?;
 			*val = val.checked_sub(limit).ok_or("error")?;
-			if let Some(v) = self.reserves.get_mut(&ALICE) {
+			if let Some(v) = self.reserves.get_mut(&TRILLIAN) {
 				*v += limit;
 			} else {
-				self.reserves.insert(ALICE, limit);
+				self.reserves.insert(TRILLIAN, limit);
 			}
 			Ok(())
 		}
@@ -227,12 +227,12 @@ mod tests {
 			if diff == 0 {
 				return Ok(());
 			}
-			let val = self.reserves.get_mut(&ALICE).ok_or("error")?;
+			let val = self.reserves.get_mut(&TRILLIAN).ok_or("error")?;
 			*val = val.checked_sub(diff).ok_or("error")?;
-			if let Some(v) = self.storages.get_mut(&ALICE) {
+			if let Some(v) = self.storages.get_mut(&TRILLIAN) {
 				*v += diff;
 			} else {
-				self.storages.insert(ALICE, diff);
+				self.storages.insert(TRILLIAN, diff);
 			}
 			Ok(())
 		}
@@ -241,11 +241,11 @@ mod tests {
 			if used == refunded {
 				return Ok(());
 			}
-			let alice = self.reserves.get_mut(&ALICE).ok_or("error")?;
+			let trillian = self.reserves.get_mut(&TRILLIAN).ok_or("error")?;
 			if used > refunded {
-				*alice = alice.checked_sub(used - refunded).ok_or("error")?;
+				*trillian = trillian.checked_sub(used - refunded).ok_or("error")?;
 			} else {
-				*alice = alice.checked_add(refunded - used).ok_or("error")?;
+				*trillian = trillian.checked_add(refunded - used).ok_or("error")?;
 			}
 
 			let contract_val = self.reserves.get_mut(&contract).ok_or("error")?;
@@ -279,8 +279,8 @@ mod tests {
 
 		assert_ok!(storage_meter.finish());
 
-		assert_eq!(handler.storages.get(&ALICE).cloned().unwrap_or_default(), 0);
-		assert_eq!(handler.reserves.get(&ALICE).cloned().unwrap_or_default(), 0);
+		assert_eq!(handler.storages.get(&TRILLIAN).cloned().unwrap_or_default(), 0);
+		assert_eq!(handler.reserves.get(&TRILLIAN).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.storages.get(&CONTRACT).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.reserves.get(&CONTRACT).cloned().unwrap_or_default(), 0);
 	}
@@ -288,7 +288,7 @@ mod tests {
 	#[test]
 	fn test_charge_storage_fee() {
 		let mut handler = DummyHandler::new();
-		handler.storages.insert(ALICE, 1000);
+		handler.storages.insert(TRILLIAN, 1000);
 
 		let mut storage_meter = StorageMeter::new(&mut handler, CONTRACT, 1000).unwrap();
 		assert_eq!(storage_meter.available_storage(), 1000);
@@ -307,8 +307,8 @@ mod tests {
 
 		assert_ok!(storage_meter.finish());
 
-		assert_eq!(handler.storages.get(&ALICE).cloned().unwrap_or_default(), 870);
-		assert_eq!(handler.reserves.get(&ALICE).cloned().unwrap_or_default(), 0);
+		assert_eq!(handler.storages.get(&TRILLIAN).cloned().unwrap_or_default(), 870);
+		assert_eq!(handler.reserves.get(&TRILLIAN).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.storages.get(&CONTRACT).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.reserves.get(&CONTRACT).cloned().unwrap_or_default(), 130);
 	}
@@ -316,7 +316,7 @@ mod tests {
 	#[test]
 	fn test_refund_storage_fee() {
 		let mut handler = DummyHandler::new();
-		handler.storages.insert(ALICE, 1000);
+		handler.storages.insert(TRILLIAN, 1000);
 		handler.reserves.insert(CONTRACT, 1000);
 
 		let mut storage_meter = StorageMeter::new(&mut handler, CONTRACT, 1000).unwrap();
@@ -330,8 +330,8 @@ mod tests {
 
 		assert_ok!(storage_meter.finish());
 
-		assert_eq!(handler.storages.get(&ALICE).cloned().unwrap_or_default(), 1050);
-		assert_eq!(handler.reserves.get(&ALICE).cloned().unwrap_or_default(), 0);
+		assert_eq!(handler.storages.get(&TRILLIAN).cloned().unwrap_or_default(), 1050);
+		assert_eq!(handler.reserves.get(&TRILLIAN).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.storages.get(&CONTRACT).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.reserves.get(&CONTRACT).cloned().unwrap_or_default(), 950);
 	}
@@ -339,7 +339,7 @@ mod tests {
 	#[test]
 	fn test_out_of_storage() {
 		let mut handler = DummyHandler::new();
-		handler.storages.insert(ALICE, 1000);
+		handler.storages.insert(TRILLIAN, 1000);
 
 		assert!(StorageMeter::new(&mut handler, CONTRACT, 1001).is_err());
 		let mut storage_meter = StorageMeter::new(&mut handler, CONTRACT, 1000).unwrap();
@@ -360,7 +360,7 @@ mod tests {
 	#[test]
 	fn test_high_use_and_refund() {
 		let mut handler = DummyHandler::new();
-		handler.storages.insert(ALICE, 1000);
+		handler.storages.insert(TRILLIAN, 1000);
 
 		let mut storage_meter = StorageMeter::new(&mut handler, CONTRACT, 1000).unwrap();
 		assert_eq!(storage_meter.available_storage(), 1000);
@@ -379,7 +379,7 @@ mod tests {
 	#[test]
 	fn test_child_meter() {
 		let mut handler = DummyHandler::new();
-		handler.storages.insert(ALICE, 1000);
+		handler.storages.insert(TRILLIAN, 1000);
 
 		let mut storage_meter = StorageMeter::new(&mut handler, CONTRACT, 1000).unwrap();
 
@@ -419,8 +419,8 @@ mod tests {
 
 		assert_ok!(storage_meter.finish());
 
-		assert_eq!(handler.storages.get(&ALICE).cloned().unwrap_or_default(), 800);
-		assert_eq!(handler.reserves.get(&ALICE).cloned().unwrap_or_default(), 0);
+		assert_eq!(handler.storages.get(&TRILLIAN).cloned().unwrap_or_default(), 800);
+		assert_eq!(handler.reserves.get(&TRILLIAN).cloned().unwrap_or_default(), 0);
 		assert_eq!(handler.reserves.get(&CONTRACT).cloned().unwrap_or_default(), 100);
 		assert_eq!(handler.reserves.get(&CONTRACT_2).cloned().unwrap_or_default(), 80);
 		assert_eq!(handler.reserves.get(&CONTRACT_3).cloned().unwrap_or_default(), 20);

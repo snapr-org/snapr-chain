@@ -1,16 +1,16 @@
 [package]
-authors = ['Reef Finance <https://reef.finance>']
+authors = ['snapr developers <https://snapr.org>']
 build = 'build.rs'
-description = 'Reef Substrate Node'
+description = 'snapr substrate node'
 edition = '2018'
-homepage = 'https://reef.finance'
+homepage = 'https://snapr.org'
 license = 'Unlicense'
-name = 'reef-node'
-repository = 'https://github.com/reef-defi/reef-chain'
+name = 'snapr-node'
+repository = 'https://github.com/snapr-defi/snapr-chain'
 version = '3.0.0'
 
 [[bin]]
-name = 'reef-node'
+name = 'snapr-node'
 
 [package.metadata.docs.rs]
 targets = ['x86_64-unknown-linux-gnu']
@@ -70,14 +70,14 @@ module-evm = { path = "../modules/evm" }
 module-evm-rpc-runtime-api = { path = "../modules/evm/rpc/runtime_api" }
 evm-rpc = { path = "../modules/evm/rpc" }
 
-reef-primitives = { path = "../primitives" }
+snapr-primitives = { path = "../primitives" }
 
 # runtime
-reef-runtime = { path = '../runtime', version = '3.0.0' }
+snapr-runtime = { path = '../runtime', version = '3.0.0' }
 
 [features]
 default = []
-runtime-benchmarks = ['reef-runtime/runtime-benchmarks']
+runtime-benchmarks = ['snapr-runtime/runtime-benchmarks']
 with-ethereum-compatibility = [
-	"reef-runtime/with-ethereum-compatibility"
+	"snapr-runtime/with-ethereum-compatibility"
 ]

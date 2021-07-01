@@ -75,7 +75,7 @@ impl pallet_timestamp::Config for Runtime {
 
 parameter_types! {
 	pub const NewContractExtraBytes: u32 = 1;
-	pub NetworkContractSource: EvmAddress = alice();
+	pub NetworkContractSource: EvmAddress = trillian();
 }
 
 ord_parameter_types! {
@@ -147,11 +147,11 @@ pub fn erc20_address() -> EvmAddress {
 	EvmAddress::from_str("2000000000000000000000000000000000000001").unwrap()
 }
 
-pub fn alice() -> EvmAddress {
+pub fn trillian() -> EvmAddress {
 	EvmAddress::from_str("1000000000000000000000000000000000000001").unwrap()
 }
 
-pub fn bob() -> EvmAddress {
+pub fn ford() -> EvmAddress {
 	EvmAddress::from_str("1000000000000000000000000000000000000002").unwrap()
 }
 

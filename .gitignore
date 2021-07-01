@@ -11,3 +11,5 @@
 
 # The cache for chain data in container
 .local
+
+assets/chain_spec_mainnet_human_readable.json

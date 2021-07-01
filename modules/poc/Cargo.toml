@@ -1,7 +1,7 @@
 [package]
 name = "module-poc"
 version = "0.1.0"
-authors = ["Reef Developers"]
+authors = ["snapr developers"]
 description = "Proof of Commitment module"
 edition = "2018"
 
@@ -17,7 +17,7 @@ frame-benchmarking = { version = "3.1.0", default-features = false, optional = t
 
 pallet-collective = { version = "3.0.0", default-features = false }
 
-primitives = { package = "reef-primitives", path = "../../primitives", default-features = false }
+primitives = { package = "snapr-primitives", path = "../../primitives", default-features = false }
 
 [dev-dependencies]
 pallet-balances = "3.0.0"

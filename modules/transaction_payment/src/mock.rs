@@ -18,11 +18,11 @@ use support::{EVMBridge, InvokeContext};
 pub type AccountId = AccountId32;
 pub type BlockNumber = u64;
 
-pub const ALICE: AccountId = AccountId::new([1u8; 32]);
-pub const BOB: AccountId = AccountId::new([2u8; 32]);
+pub const TRILLIAN: AccountId = AccountId::new([1u8; 32]);
+pub const FORD: AccountId = AccountId::new([2u8; 32]);
 
-pub const REEF: CurrencyId = CurrencyId::Token(TokenSymbol::REEF);
-pub const RUSD: CurrencyId = CurrencyId::Token(TokenSymbol::RUSD);
+pub const SNAPR: CurrencyId = CurrencyId::Token(TokenSymbol::SNAPR);
+pub const SEUR: CurrencyId = CurrencyId::Token(TokenSymbol::SEUR);
 
 parameter_types! {
 	pub const BlockHashCount: u64 = 250;
@@ -139,7 +139,7 @@ where
 }
 
 parameter_types! {
-	pub const GetNativeCurrencyId: CurrencyId = REEF;
+	pub const GetNativeCurrencyId: CurrencyId = SNAPR;
 }
 
 impl module_currencies::Config for Runtime {
@@ -160,8 +160,8 @@ ord_parameter_types! {
 }
 
 parameter_types! {
-	pub AllNonNativeCurrencyIds: Vec<CurrencyId> = vec![RUSD];
-	pub const StableCurrencyId: CurrencyId = RUSD;
+	pub AllNonNativeCurrencyIds: Vec<CurrencyId> = vec![SEUR];
+	pub const StableCurrencyId: CurrencyId = SEUR;
 	pub static TransactionByteFee: u128 = 1;
 }
 
@@ -223,7 +223,7 @@ pub struct ExtBuilder {
 impl Default for ExtBuilder {
 	fn default() -> Self {
 		Self {
-			endowed_accounts: vec![(ALICE, RUSD, 10000)],
+			endowed_accounts: vec![(TRILLIAN, SEUR, 10000)],
 			base_weight: 0,
 			byte_fee: 2,
 			weight_to_fee: 1,
@@ -256,7 +256,7 @@ impl ExtBuilder {
 			.unwrap();
 
 		pallet_balances::GenesisConfig::<Runtime> {
-			balances: vec![(ALICE, 100000)],
+			balances: vec![(TRILLIAN, 100000)],
 		}
 		.assimilate_storage(&mut t)
 		.unwrap();

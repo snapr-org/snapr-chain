@@ -178,7 +178,7 @@ impl<T: Config> Pallet<T> {
 	// Constructs the message that Ethereum RPC's `personal_sign` and `eth_sign`
 	// would sign.
 	pub fn ethereum_signable_message(what: &[u8], extra: &[u8]) -> Vec<u8> {
-		let prefix = b"reef evm:";
+		let prefix = b"snapr evm:";
 		let mut l = prefix.len() + what.len() + extra.len();
 		let mut rev = Vec::new();
 		while l > 0 {

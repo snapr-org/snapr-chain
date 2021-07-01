@@ -88,7 +88,7 @@ impl orml_tokens::Config for Test {
 }
 
 parameter_types! {
-	pub const GetNativeCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::REEF);
+	pub const GetNativeCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::SNAPR);
 }
 
 impl orml_currencies::Config for Test {
@@ -109,7 +109,7 @@ impl Convert<u64, u64> for GasToWeight {
 }
 
 parameter_types! {
-	pub NetworkContractSource: H160 = alice();
+	pub NetworkContractSource: H160 = trillian();
 }
 
 ord_parameter_types! {
@@ -173,11 +173,11 @@ pub fn contract_b() -> H160 {
 	H160::from_str("2000000000000000000000000000000000000002").unwrap()
 }
 
-pub fn alice() -> H160 {
+pub fn trillian() -> H160 {
 	H160::from_str("1000000000000000000000000000000000000001").unwrap()
 }
 
-pub fn bob() -> H160 {
+pub fn ford() -> H160 {
 	H160::from_str("1000000000000000000000000000000000000002").unwrap()
 }
 
@@ -215,7 +215,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 	);
 
 	accounts.insert(
-		alice(),
+		trillian(),
 		GenesisAccount {
 			nonce: 1,
 			balance: INITIAL_BALANCE,
@@ -224,7 +224,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		},
 	);
 	accounts.insert(
-		bob(),
+		ford(),
 		GenesisAccount {
 			nonce: 1,
 			balance: INITIAL_BALANCE,

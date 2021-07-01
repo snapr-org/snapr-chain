@@ -3,7 +3,7 @@
 use crate::{*};
 use frame_benchmarking::{benchmarks, account, impl_benchmark_test_suite};
 use frame_system::RawOrigin;
-use primitives::{currency::REEF, time::DAYS};
+use primitives::{currency::SNAPR, time::DAYS};
 
 benchmarks! {
 	where_clause { where BalanceOf<T>: From<u128> }
@@ -22,14 +22,14 @@ benchmarks! {
 		for i in 0..1_000 {
 			let voter: T::AccountId = account("voter", i, 0);
 			let candidate: T::AccountId = account("candidate", i, 0);
-			T::Currency::deposit_creating(&voter, BalanceOf::<T>::from(100_001 * REEF));
-			T::Currency::deposit_creating(&candidate, BalanceOf::<T>::from(1_000_001 * REEF));
+			T::Currency::deposit_creating(&voter, BalanceOf::<T>::from(100_001 * SNAPR));
+			T::Currency::deposit_creating(&candidate, BalanceOf::<T>::from(1_000_001 * SNAPR));
 
 			let _ = Pallet::<T>::start_candidacy(
 				RawOrigin::Signed(candidate.clone()).into()
 			);
 
-			let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
+			let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
 			let _ = Pallet::<T>::commit(
 				RawOrigin::Signed(voter.clone()).into(),
 				amount,
@@ -44,127 +44,127 @@ benchmarks! {
 	}
 
 	start_candidacy {
-		let alice: T::AccountId = account("alice", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(1_000_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(1_000_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-	}: _(RawOrigin::Signed(alice))
+	}: _(RawOrigin::Signed(trillian))
 
 	stop_candidacy {
-		let alice: T::AccountId = account("alice", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(1_000_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(1_000_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
 		let _ = Pallet::<T>::start_candidacy(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 		);
 
-	}: _(RawOrigin::Signed(alice))
+	}: _(RawOrigin::Signed(trillian))
 
 	commit {
-		let alice: T::AccountId = account("alice", 0, 0);
-		let bob: T::AccountId = account("bob", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
+		let ford: T::AccountId = account("ford", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(100_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(100_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
-	}: _(RawOrigin::Signed(alice), amount, LockDuration::OneYear, bob)
+		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
+	}: _(RawOrigin::Signed(trillian), amount, LockDuration::OneYear, ford)
 
 
 	add_funds {
-		let alice: T::AccountId = account("alice", 0, 0);
-		let bob: T::AccountId = account("bob", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
+		let ford: T::AccountId = account("ford", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
+		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
 
 		// she makes initial commitment
 		let _ = Pallet::<T>::commit(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 			amount,
 			LockDuration::OneYear,
-			bob
+			ford
 		);
 
-	}: _(RawOrigin::Signed(alice), amount)
+	}: _(RawOrigin::Signed(trillian), amount)
 
 	unbond {
-		let alice: T::AccountId = account("alice", 0, 0);
-		let bob: T::AccountId = account("bob", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
+		let ford: T::AccountId = account("ford", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
+		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
 
 		// she makes initial commitment
 		let _ = Pallet::<T>::commit(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 			amount,
 			LockDuration::OneYear,
-			bob
+			ford
 		);
 
-	}: _(RawOrigin::Signed(alice))
+	}: _(RawOrigin::Signed(trillian))
 
 	withdraw {
-		let alice: T::AccountId = account("alice", 0, 0);
-		let bob: T::AccountId = account("bob", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
+		let ford: T::AccountId = account("ford", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
+		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
 
 		// she makes initial commitment
 		let _ = Pallet::<T>::commit(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 			amount,
 			LockDuration::OneMonth,
-			bob
+			ford
 		);
 
 		// she unbonds
 		let _ = Pallet::<T>::unbond(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 		);
 
 		// skip 1 month
 		frame_system::Module::<T>::set_block_number((31 * DAYS).into());
 
-	}: _(RawOrigin::Signed(alice))
+	}: _(RawOrigin::Signed(trillian))
 
 	vote_candidate {
-		let alice: T::AccountId = account("alice", 0, 0);
-		let bob: T::AccountId = account("bob", 0, 0);
+		let trillian: T::AccountId = account("trillian", 0, 0);
+		let ford: T::AccountId = account("ford", 0, 0);
 		let charlie: T::AccountId = account("charlie", 0, 0);
 
-		// alice needs funds
-		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * REEF);
-		T::Currency::deposit_creating(&alice, deposit);
+		// trillian needs funds
+		let deposit: BalanceOf<T> = BalanceOf::<T>::from(200_001 * SNAPR);
+		T::Currency::deposit_creating(&trillian, deposit);
 
-		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * REEF);
+		let amount: BalanceOf<T> = BalanceOf::<T>::from(100_000 * SNAPR);
 
 		// she makes initial commitment
 		let _ = Pallet::<T>::commit(
-			RawOrigin::Signed(alice.clone()).into(),
+			RawOrigin::Signed(trillian.clone()).into(),
 			amount,
 			LockDuration::OneYear,
-			bob
+			ford
 		);
 
-	}: _(RawOrigin::Signed(alice), charlie)
+	}: _(RawOrigin::Signed(trillian), charlie)
 
 }
 

@@ -2,9 +2,9 @@
 use super::*;
 use crate::precompile::{
 	mock::{
-		alice, bob, get_task_id, new_test_ext, run_to_block, Balances, Event as TestEvent,
+		trillian, ford, get_task_id, new_test_ext, run_to_block, Balances, Event as TestEvent,
 		ScheduleCallPrecompile, System, Test,
-		REEF_ERC20_ADDRESS,
+		SNAPR_ERC20_ADDRESS,
 	},
 	schedule_call::TaskInfo,
 };
@@ -90,7 +90,7 @@ fn schedule_call_precompile_should_work() {
 	new_test_ext().execute_with(|| {
 		let context = Context {
 			address: Default::default(),
-			caller: alice(),
+			caller: trillian(),
 			apparent_value: Default::default(),
 		};
 
@@ -100,9 +100,9 @@ fn schedule_call_precompile_should_work() {
 		// action
 		U256::default().to_big_endian(&mut input[1 * 32..2 * 32]);
 		// from
-		U256::from(alice().as_bytes()).to_big_endian(&mut input[2 * 32..3 * 32]);
+		U256::from(trillian().as_bytes()).to_big_endian(&mut input[2 * 32..3 * 32]);
 		// target
-		U256::from(REEF_ERC20_ADDRESS).to_big_endian(&mut input[3 * 32..4 * 32]);
+		U256::from(SNAPR_ERC20_ADDRESS).to_big_endian(&mut input[3 * 32..4 * 32]);
 		// value
 		U256::from(0).to_big_endian(&mut input[4 * 32..5 * 32]);
 		// gas_limit
@@ -119,7 +119,7 @@ fn schedule_call_precompile_should_work() {
 		// transfer bytes4(keccak256(signature)) 0xa9059cbb
 		transfer_to_bob[0..4].copy_from_slice(&hex!("a9059cbb"));
 		// to address
-		U256::from(bob().as_bytes()).to_big_endian(&mut transfer_to_bob[4..36]);
+		U256::from(ford().as_bytes()).to_big_endian(&mut transfer_to_bob[4..36]);
 		// amount
 		U256::from(1000).to_big_endian(&mut transfer_to_bob[36..68]);
 
@@ -141,7 +141,7 @@ fn schedule_call_precompile_should_work() {
 		// action
 		U256::from(1).to_big_endian(&mut cancel_input[1 * 32..2 * 32]);
 		// from
-		U256::from(alice().as_bytes()).to_big_endian(&mut cancel_input[2 * 32..3 * 32]);
+		U256::from(trillian().as_bytes()).to_big_endian(&mut cancel_input[2 * 32..3 * 32]);
 		// task_id_len
 		U256::from(task_id.len()).to_big_endian(&mut cancel_input[3 * 32..4 * 32]);
 		// task_id
@@ -167,7 +167,7 @@ fn schedule_call_precompile_should_work() {
 		// action
 		U256::from(2).to_big_endian(&mut reschedule_input[1 * 32..2 * 32]);
 		// from
-		U256::from(alice().as_bytes()).to_big_endian(&mut reschedule_input[2 * 32..3 * 32]);
+		U256::from(trillian().as_bytes()).to_big_endian(&mut reschedule_input[2 * 32..3 * 32]);
 		// min_delay
 		U256::from(2).to_big_endian(&mut reschedule_input[3 * 32..4 * 32]);
 		// task_id_len
@@ -181,8 +181,8 @@ fn schedule_call_precompile_should_work() {
 		let event = TestEvent::pallet_scheduler(pallet_scheduler::RawEvent::Scheduled(5, 0));
 		assert!(System::events().iter().any(|record| record.event == event));
 
-		let from_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&alice());
-		let to_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&bob());
+		let from_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&trillian());
+		let to_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&ford());
 		#[cfg(not(feature = "with-ethereum-compatibility"))]
 		{
 			assert_eq!(Balances::free_balance(from_account.clone()), 999999700000);
@@ -217,7 +217,7 @@ fn schedule_call_precompile_should_handle_invalid_input() {
 	new_test_ext().execute_with(|| {
 		let context = Context {
 			address: Default::default(),
-			caller: alice(),
+			caller: trillian(),
 			apparent_value: Default::default(),
 		};
 
@@ -227,9 +227,9 @@ fn schedule_call_precompile_should_handle_invalid_input() {
 		// action
 		U256::default().to_big_endian(&mut input[1 * 32..2 * 32]);
 		// from
-		U256::from(alice().as_bytes()).to_big_endian(&mut input[2 * 32..3 * 32]);
+		U256::from(trillian().as_bytes()).to_big_endian(&mut input[2 * 32..3 * 32]);
 		// target
-		U256::from(REEF_ERC20_ADDRESS).to_big_endian(&mut input[3 * 32..4 * 32]);
+		U256::from(SNAPR_ERC20_ADDRESS).to_big_endian(&mut input[3 * 32..4 * 32]);
 		// value
 		U256::from(0).to_big_endian(&mut input[4 * 32..5 * 32]);
 		// gas_limit
@@ -248,8 +248,8 @@ fn schedule_call_precompile_should_handle_invalid_input() {
 		assert_eq!(reason, ExitSucceed::Returned);
 		assert_eq!(used_gas, 0);
 
-		let from_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&alice());
-		let to_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&bob());
+		let from_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&trillian());
+		let to_account = <Test as module_evm::Config>::AddressMapping::get_account_id(&ford());
 		#[cfg(not(feature = "with-ethereum-compatibility"))]
 		{
 			assert_eq!(Balances::free_balance(from_account.clone()), 999999700000);
@@ -271,7 +271,7 @@ fn schedule_call_precompile_should_handle_invalid_input() {
 		// action
 		U256::from(1).to_big_endian(&mut cancel_input[1 * 32..2 * 32]);
 		// from
-		U256::from(bob().as_bytes()).to_big_endian(&mut cancel_input[2 * 32..3 * 32]);
+		U256::from(ford().as_bytes()).to_big_endian(&mut cancel_input[2 * 32..3 * 32]);
 		// task_id_len
 		U256::from(task_id.len()).to_big_endian(&mut cancel_input[3 * 32..4 * 32]);
 		// task_id

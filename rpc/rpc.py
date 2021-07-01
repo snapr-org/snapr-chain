@@ -4,8 +4,8 @@ import json
 types = json.load(open("../assets/types.json", "r"))
 
 # url = "http://127.0.0.1:9933"
-url = "https://rpc-testnet.reefscan.com"
-# url = "https://rpc.reefscan.com"
+url = "https://rpc-testnet.snaprscan.com"
+# url = "https://rpc.snaprscan.com"
 
 s = SubstrateInterface(
     url=url,
@@ -28,22 +28,22 @@ s.query('Balances', 'TotalIssuance')
 ## current metadata
 s.get_runtime_metadata()
 
-## send 100 REEF from Alice -> Bob
+## send 100 SNAPR from Trillian -> Ford
 from substrateinterface import Keypair
-alice = Keypair.create_from_uri('//Alice')
-bob = Keypair.create_from_uri('//Bob')
+trillian = Keypair.create_from_uri('//Trillian')
+ford = Keypair.create_from_uri('//Ford')
 
 call = s.compose_call(
     call_module='Balances',
     call_function='transfer',
     call_params={
-        'dest': bob.ss58_address,
+        'dest': ford.ss58_address,
         'value': 100 * 10**18
     }
 )
-extrinsic = s.create_signed_extrinsic(call=call, keypair=alice)
+extrinsic = s.create_signed_extrinsic(call=call, keypair=trillian)
 # tx dry run
-s.get_payment_info(call=call, keypair=alice)
+s.get_payment_info(call=call, keypair=trillian)
 
 
 ## check tx metadata

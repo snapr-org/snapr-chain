@@ -90,11 +90,11 @@ impl pallet_balances::Config for Test {
 	type MaxLocks = ();
 }
 
-pub const REEF: CurrencyId = CurrencyId::Token(TokenSymbol::REEF);
-pub const RUSD: CurrencyId = CurrencyId::Token(TokenSymbol::RUSD);
+pub const SNAPR: CurrencyId = CurrencyId::Token(TokenSymbol::SNAPR);
+pub const SEUR: CurrencyId = CurrencyId::Token(TokenSymbol::SEUR);
 
 parameter_types! {
-	pub const GetNativeCurrencyId: CurrencyId = REEF;
+	pub const GetNativeCurrencyId: CurrencyId = SNAPR;
 }
 
 impl module_currencies::Config for Test {
@@ -112,8 +112,8 @@ impl module_evm_bridge::Config for Test {
 
 parameter_types! {
 	pub const TransactionByteFee: Balance = 10;
-	pub const GetStableCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::RUSD);
-	pub AllNonNativeCurrencyIds: Vec<CurrencyId> = vec![CurrencyId::Token(TokenSymbol::RUSD)];
+	pub const GetStableCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::SEUR);
+	pub AllNonNativeCurrencyIds: Vec<CurrencyId> = vec![CurrencyId::Token(TokenSymbol::SEUR)];
 }
 
 impl module_transaction_payment::Config for Test {
@@ -217,7 +217,7 @@ pub type ScheduleCallPrecompile = crate::ScheduleCallPrecompile<
 >;
 
 parameter_types! {
-	pub NetworkContractSource: H160 = alice();
+	pub NetworkContractSource: H160 = trillian();
 }
 
 ord_parameter_types! {
@@ -263,13 +263,13 @@ impl module_evm::Config for Test {
 	type WeightInfo = ();
 }
 
-pub const ALICE: AccountId = AccountId::new([1u8; 32]);
+pub const TRILLIAN: AccountId = AccountId::new([1u8; 32]);
 
-pub fn alice() -> H160 {
+pub fn trillian() -> H160 {
 	H160([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
 }
 
-pub fn bob() -> H160 {
+pub fn ford() -> H160 {
 	H160([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2])
 }
 
@@ -295,7 +295,7 @@ pub fn evm_genesis() -> BTreeMap<H160, module_evm::GenesisAccount<Balance, u64>>
 }
 
 pub const INITIAL_BALANCE: Balance = 1_000_000_000_000;
-pub const REEF_ERC20_ADDRESS: &str = "0x0000000000000000000000000000000001000000";
+pub const SNAPR_ERC20_ADDRESS: &str = "0x0000000000000000000000000000000001000000";
 
 type UncheckedExtrinsic = frame_system::mocking::MockUncheckedExtrinsic<Test>;
 type Block = frame_system::mocking::MockBlock<Test>;
@@ -330,7 +330,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 	accounts.append(&mut evm_genesis_accounts);
 
 	accounts.insert(
-		alice(),
+		trillian(),
 		module_evm::GenesisAccount {
 			nonce: 1,
 			balance: INITIAL_BALANCE,
@@ -339,7 +339,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 		},
 	);
 	accounts.insert(
-		bob(),
+		ford(),
 		module_evm::GenesisAccount {
 			nonce: 1,
 			balance: INITIAL_BALANCE,
@@ -364,16 +364,16 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 
 		assert_ok!(Currencies::update_balance(
 			Origin::root(),
-			ALICE,
-			REEF,
+			TRILLIAN,
+			SNAPR,
 			1_000_000_000_000
 		));
-		assert_ok!(Currencies::update_balance(Origin::root(), ALICE, RUSD, 1_000_000_000));
+		assert_ok!(Currencies::update_balance(Origin::root(), TRILLIAN, SEUR, 1_000_000_000));
 
 		assert_ok!(Currencies::update_balance(
 			Origin::root(),
-			MockAddressMapping::get_account_id(&alice()),
-			RUSD,
+			MockAddressMapping::get_account_id(&trillian()),
+			SEUR,
 			1_000
 		));
 	});

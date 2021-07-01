@@ -20,13 +20,13 @@ build:
 
 .PHONY: wasm
 wasm:
-	cargo build -p reef-runtime --features with-ethereum-compatibility --release
+	cargo build -p snapr-runtime --features with-ethereum-compatibility --release
 
 .PHONY: genesis
 genesis:
 	make release
-	./target/release/reef-node build-spec --chain testnet > assets/chain_spec_testnet.json
-	./target/release/reef-node build-spec --chain mainnet > assets/chain_spec_mainnet.json
+	./target/release/snapr-node build-spec --chain testnet > assets/chain_spec_testnet.json
+	./target/release/snapr-node build-spec --chain mainnet > assets/chain_spec_mainnet.json
 
 .PHONY: check
 check:
@@ -46,7 +46,7 @@ test:
 
 .PHONY: debug
 debug:
-	cargo build && RUST_LOG=debug RUST_BACKTRACE=1 rust-gdb --args target/debug/reef-node --dev --tmp -lruntime=debug
+	cargo build && RUST_LOG=debug RUST_BACKTRACE=1 rust-gdb --args target/debug/snapr-node --dev --tmp -lruntime=debug
 
 .PHONY: run
 run:

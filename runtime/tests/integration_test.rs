@@ -5,7 +5,7 @@ use frame_support::{
 	assert_noop, assert_ok,
 	traits::{GenesisBuild, OnFinalize, OnInitialize},
 };
-use reef_runtime::{
+use snapr_runtime::{
 	get_all_module_accounts,
 	AccountId, AuthoritysOriginId,
 	Balance, Balances, Call,
@@ -24,8 +24,8 @@ use sp_runtime::{
 
 use primitives::currency::*;
 
-const ALICE: [u8; 32] = [4u8; 32];
-const BOB: [u8; 32] = [5u8; 32];
+const TRILLIAN: [u8; 32] = [4u8; 32];
+const FORD: [u8; 32] = [5u8; 32];
 
 pub type SystemModule = frame_system::Module<Runtime>;
 pub type AuthorityModule = orml_authority::Module<Runtime>;
@@ -111,16 +111,16 @@ fn amount(amount: u128) -> u128 {
 	amount.saturating_mul(Price::accuracy())
 }
 
-fn alice() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Alice")).unwrap()
+fn trillian() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Trillian")).unwrap()
 }
 
-fn bob() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Bob")).unwrap()
+fn ford() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Ford")).unwrap()
 }
 
 pub fn alice_account_id() -> AccountId {
-	let address = EvmAccounts::eth_address(&alice());
+	let address = EvmAccounts::eth_address(&trillian());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);
@@ -128,7 +128,7 @@ pub fn alice_account_id() -> AccountId {
 }
 
 pub fn bob_account_id() -> AccountId {
-	let address = EvmAccounts::eth_address(&bob());
+	let address = EvmAccounts::eth_address(&ford());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);
@@ -171,8 +171,8 @@ fn test_authority_module() {
 	ExtBuilder::default()
 		.balances(vec![
 			(
-				AccountId::from(ALICE),
-				CurrencyId::Token(TokenSymbol::RUSD),
+				AccountId::from(TRILLIAN),
+				CurrencyId::Token(TokenSymbol::SEUR),
 				amount(1000),
 			),
 		])
@@ -193,7 +193,7 @@ fn test_authority_module() {
 
 			assert_noop!(
 				AuthorityModule::dispatch_as(
-					Origin::signed(AccountId::from(BOB)),
+					Origin::signed(AccountId::from(FORD)),
 					AuthoritysOriginId::Root,
 					Box::new(ensure_root_call.clone())
 				),
@@ -204,8 +204,8 @@ fn test_authority_module() {
 			run_to_block(1);
 			// // DSWF transfer
 			// let transfer_call = Call::Currencies(module_currencies::Call::transfer(
-			// 	AccountId::from(BOB).into(),
-			// 	CurrencyId::Token(TokenSymbol::RUSD),
+			// 	AccountId::from(FORD).into(),
+			// 	CurrencyId::Token(TokenSymbol::SEUR),
 			// 	amount(500),
 			// ));
 			// let dswf_call = Call::Authority(orml_authority::Call::dispatch_as(
@@ -240,13 +240,13 @@ fn test_authority_module() {
 			// run_to_block(2);
 			// assert_eq!(
 			// 	Currencies::free_balance(
-			// 		CurrencyId::Token(TokenSymbol::RUSD),
+			// 		CurrencyId::Token(TokenSymbol::SEUR),
 			// 		&DSWFModuleId::get().into_account()
 			// 	),
 			// 	amount(500)
 			// );
 			// assert_eq!(
-			// 	Currencies::free_balance(CurrencyId::Token(TokenSymbol::RUSD), &AccountId::from(BOB)),
+			// 	Currencies::free_balance(CurrencyId::Token(TokenSymbol::SEUR), &AccountId::from(FORD)),
 			// 	amount(500)
 			// );
             //
@@ -397,38 +397,38 @@ fn test_evm_accounts_module() {
 	ExtBuilder::default()
 		.balances(vec![(
 			bob_account_id(),
-			CurrencyId::Token(TokenSymbol::REEF),
+			CurrencyId::Token(TokenSymbol::SNAPR),
 			amount(1000),
 		)])
 		.build()
 		.execute_with(|| {
-			assert_eq!(Balances::free_balance(AccountId::from(ALICE)), 0);
+			assert_eq!(Balances::free_balance(AccountId::from(TRILLIAN)), 0);
 			assert_eq!(Balances::free_balance(bob_account_id()), 1000000000000000000000);
 			assert_ok!(EvmAccounts::claim_account(
-				Origin::signed(AccountId::from(ALICE)),
-				EvmAccounts::eth_address(&alice()),
-				EvmAccounts::eth_sign(&alice(), &AccountId::from(ALICE).encode(), &[][..])
+				Origin::signed(AccountId::from(TRILLIAN)),
+				EvmAccounts::eth_address(&trillian()),
+				EvmAccounts::eth_sign(&trillian(), &AccountId::from(TRILLIAN).encode(), &[][..])
 			));
 			let event = Event::module_evm_accounts(module_evm_accounts::Event::ClaimAccount(
-				AccountId::from(ALICE),
-				EvmAccounts::eth_address(&alice()),
+				AccountId::from(TRILLIAN),
+				EvmAccounts::eth_address(&trillian()),
 			));
 			assert_eq!(last_event(), event);
 
 			// claim another eth address
 			assert_noop!(
 				EvmAccounts::claim_account(
-					Origin::signed(AccountId::from(ALICE)),
-					EvmAccounts::eth_address(&alice()),
-					EvmAccounts::eth_sign(&alice(), &AccountId::from(ALICE).encode(), &[][..])
+					Origin::signed(AccountId::from(TRILLIAN)),
+					EvmAccounts::eth_address(&trillian()),
+					EvmAccounts::eth_sign(&trillian(), &AccountId::from(TRILLIAN).encode(), &[][..])
 				),
 				module_evm_accounts::Error::<Runtime>::AccountIdHasMapped
 			);
 			assert_noop!(
 				EvmAccounts::claim_account(
-					Origin::signed(AccountId::from(BOB)),
-					EvmAccounts::eth_address(&alice()),
-					EvmAccounts::eth_sign(&alice(), &AccountId::from(BOB).encode(), &[][..])
+					Origin::signed(AccountId::from(FORD)),
+					EvmAccounts::eth_address(&trillian()),
+					EvmAccounts::eth_sign(&trillian(), &AccountId::from(FORD).encode(), &[][..])
 				),
 				module_evm_accounts::Error::<Runtime>::EthAddressHasMapped
 			);
@@ -440,16 +440,16 @@ fn test_evm_accounts_module() {
 fn test_evm_module() {
 	ExtBuilder::default()
 		.balances(vec![
-			(alice_account_id(), CurrencyId::Token(TokenSymbol::REEF), amount(1 * MILLI_REEF)),
-			(bob_account_id(), CurrencyId::Token(TokenSymbol::REEF), amount(1 * MILLI_REEF)),
+			(alice_account_id(), CurrencyId::Token(TokenSymbol::SNAPR), amount(1 * MILLI_SNAPR)),
+			(bob_account_id(), CurrencyId::Token(TokenSymbol::SNAPR), amount(1 * MILLI_SNAPR)),
 		])
 		.build()
 		.execute_with(|| {
-			assert_eq!(Balances::free_balance(alice_account_id()), amount(1 * MILLI_REEF));
-			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_REEF));
+			assert_eq!(Balances::free_balance(alice_account_id()), amount(1 * MILLI_SNAPR));
+			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_SNAPR));
 
-			let _alice_address = EvmAccounts::eth_address(&alice());
-			let bob_address = EvmAccounts::eth_address(&bob());
+			let _alice_address = EvmAccounts::eth_address(&trillian());
+			let bob_address = EvmAccounts::eth_address(&ford());
 
 			let contract = deploy_contract(alice_account_id()).unwrap();
 			let event = Event::module_evm(module_evm::Event::Created(contract));
@@ -465,16 +465,16 @@ fn test_evm_module() {
 
 			// test EvmAccounts Lookup
 			assert_eq!(Balances::free_balance(alice_account_id()), 999999999999989633000000000000000);
-			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_REEF));
-			let to = EvmAccounts::eth_address(&alice());
+			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_SNAPR));
+			let to = EvmAccounts::eth_address(&trillian());
 			assert_ok!(Currencies::transfer(
 				Origin::signed(bob_account_id()),
 				MultiAddress::Address20(to.0),
-				CurrencyId::Token(TokenSymbol::REEF),
-				amount(10 * MICRO_REEF)
+				CurrencyId::Token(TokenSymbol::SNAPR),
+				amount(10 * MICRO_SNAPR)
 			));
 			assert_eq!(Balances::free_balance(alice_account_id()), 1009999999999989633000000000000000);
-			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_REEF) - amount(10 * MICRO_REEF));
+			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_SNAPR) - amount(10 * MICRO_SNAPR));
 		});
 }
 
@@ -483,13 +483,13 @@ fn test_evm_module() {
 fn test_evm_module() {
 	ExtBuilder::default()
 		.balances(vec![
-			(alice_account_id(), CurrencyId::Token(TokenSymbol::REEF), amount(1 * MILLI_REEF)),
-			(bob_account_id(), CurrencyId::Token(TokenSymbol::REEF), amount(1 * MILLI_REEF)),
+			(alice_account_id(), CurrencyId::Token(TokenSymbol::SNAPR), amount(1 * MILLI_SNAPR)),
+			(bob_account_id(), CurrencyId::Token(TokenSymbol::SNAPR), amount(1 * MILLI_SNAPR)),
 		])
 		.build()
 		.execute_with(|| {
-			assert_eq!(Balances::free_balance(alice_account_id()), amount(1 * MILLI_REEF));
-			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_REEF));
+			assert_eq!(Balances::free_balance(alice_account_id()), amount(1 * MILLI_SNAPR));
+			assert_eq!(Balances::free_balance(bob_account_id()), amount(1 * MILLI_SNAPR));
 
 			use std::fs::{self, File};
 			use std::io::Read;

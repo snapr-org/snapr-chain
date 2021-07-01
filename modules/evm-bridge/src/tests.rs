@@ -4,7 +4,7 @@
 
 use super::*;
 use frame_support::{assert_err, assert_ok};
-use mock::{alice, bob, erc20_address, EvmBridgeModule, ExtBuilder, Runtime};
+use mock::{trillian, ford, erc20_address, EvmBridgeModule, ExtBuilder, Runtime};
 use primitives::evm::AddressMapping;
 
 #[test]
@@ -30,11 +30,11 @@ fn should_read_balance_of() {
 			origin: Default::default(),
 		};
 
-		assert_eq!(EvmBridgeModule::balance_of(context, bob()), Ok(0));
+		assert_eq!(EvmBridgeModule::balance_of(context, ford()), Ok(0));
 
-		assert_eq!(EvmBridgeModule::balance_of(context, alice()), Ok(u128::max_value()));
+		assert_eq!(EvmBridgeModule::balance_of(context, trillian()), Ok(u128::max_value()));
 
-		assert_eq!(EvmBridgeModule::balance_of(context, bob()), Ok(0));
+		assert_eq!(EvmBridgeModule::balance_of(context, ford()), Ok(0));
 	});
 }
 
@@ -43,11 +43,11 @@ fn should_transfer() {
 	ExtBuilder::default()
 		.balances(vec![
 			(
-				<Runtime as module_evm::Config>::AddressMapping::get_account_id(&alice()),
+				<Runtime as module_evm::Config>::AddressMapping::get_account_id(&trillian()),
 				100000,
 			),
 			(
-				<Runtime as module_evm::Config>::AddressMapping::get_account_id(&bob()),
+				<Runtime as module_evm::Config>::AddressMapping::get_account_id(&ford()),
 				100000,
 			),
 		])
@@ -57,10 +57,10 @@ fn should_transfer() {
 				EvmBridgeModule::transfer(
 					InvokeContext {
 						contract: erc20_address(),
-						sender: bob(),
-						origin: bob(),
+						sender: ford(),
+						origin: ford(),
 					},
-					alice(),
+					trillian(),
 					10
 				),
 				Error::<Runtime>::ExecutionRevert
@@ -69,20 +69,20 @@ fn should_transfer() {
 			assert_ok!(EvmBridgeModule::transfer(
 				InvokeContext {
 					contract: erc20_address(),
-					sender: alice(),
-					origin: alice(),
+					sender: trillian(),
+					origin: trillian(),
 				},
-				bob(),
+				ford(),
 				100
 			));
 			assert_eq!(
 				EvmBridgeModule::balance_of(
 					InvokeContext {
 						contract: erc20_address(),
-						sender: alice(),
-						origin: alice(),
+						sender: trillian(),
+						origin: trillian(),
 					},
-					bob()
+					ford()
 				),
 				Ok(100)
 			);
@@ -90,10 +90,10 @@ fn should_transfer() {
 			assert_ok!(EvmBridgeModule::transfer(
 				InvokeContext {
 					contract: erc20_address(),
-					sender: bob(),
-					origin: bob(),
+					sender: ford(),
+					origin: ford(),
 				},
-				alice(),
+				trillian(),
 				10
 			));
 
@@ -101,10 +101,10 @@ fn should_transfer() {
 				EvmBridgeModule::balance_of(
 					InvokeContext {
 						contract: erc20_address(),
-						sender: alice(),
-						origin: bob(),
+						sender: trillian(),
+						origin: ford(),
 					},
-					bob()
+					ford()
 				),
 				Ok(90)
 			);
@@ -113,10 +113,10 @@ fn should_transfer() {
 				EvmBridgeModule::transfer(
 					InvokeContext {
 						contract: erc20_address(),
-						sender: bob(),
-						origin: bob(),
+						sender: ford(),
+						origin: ford(),
 					},
-					alice(),
+					trillian(),
 					100
 				),
 				Error::<Runtime>::ExecutionRevert

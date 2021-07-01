@@ -1,6 +1,6 @@
 use crate::{AccountId, Balance, EvmAccounts, Runtime, DOLLARS};
 
-use super::utils::set_reef_balance;
+use super::utils::set_snapr_balance;
 use codec::Encode;
 use frame_benchmarking::{account, whitelisted_caller};
 use frame_system::RawOrigin;
@@ -15,16 +15,16 @@ fn dollar(d: u32) -> Balance {
 	DOLLARS.saturating_mul(d)
 }
 
-fn alice() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Alice")).unwrap()
+fn trillian() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Trillian")).unwrap()
 }
 
-fn bob() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Bob")).unwrap()
+fn ford() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Ford")).unwrap()
 }
 
 pub fn bob_account_id() -> AccountId {
-	let address = EvmAccounts::eth_address(&bob());
+	let address = EvmAccounts::eth_address(&ford());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);
@@ -39,8 +39,8 @@ runtime_benchmarks! {
 	claim_account {
 		let caller: AccountId = account("caller", 0, SEED);
 		let eth: AccountId = account("eth", 0, SEED);
-		set_reef_balance(&bob_account_id(), dollar(1000));
-	}: _(RawOrigin::Signed(caller), EvmAccounts::eth_address(&alice()), EvmAccounts::eth_sign(&alice(), &caller.encode(), &[][..]))
+		set_snapr_balance(&bob_account_id(), dollar(1000));
+	}: _(RawOrigin::Signed(caller), EvmAccounts::eth_address(&trillian()), EvmAccounts::eth_sign(&trillian(), &caller.encode(), &[][..]))
 
 	claim_default_account {
 		let caller = whitelisted_caller();

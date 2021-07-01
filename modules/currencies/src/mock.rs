@@ -76,8 +76,8 @@ impl tokens::Config for Runtime {
 	type WeightInfo = ();
 }
 
-pub const NATIVE_CURRENCY_ID: CurrencyId = CurrencyId::Token(TokenSymbol::REEF);
-pub const X_TOKEN_ID: CurrencyId = CurrencyId::Token(TokenSymbol::RUSD);
+pub const NATIVE_CURRENCY_ID: CurrencyId = CurrencyId::Token(TokenSymbol::SNAPR);
+pub const X_TOKEN_ID: CurrencyId = CurrencyId::Token(TokenSymbol::SEUR);
 
 parameter_types! {
 	pub const GetNativeCurrencyId: CurrencyId = NATIVE_CURRENCY_ID;
@@ -182,20 +182,20 @@ frame_support::construct_runtime!(
 	}
 );
 
-pub fn alice() -> AccountId {
+pub fn trillian() -> AccountId {
 	<Runtime as Config>::AddressMapping::get_account_id(
 		&H160::from_str("1000000000000000000000000000000000000001").unwrap(),
 	)
 }
 
-pub fn bob() -> AccountId {
+pub fn ford() -> AccountId {
 	<Runtime as Config>::AddressMapping::get_account_id(
 		&H160::from_str("1000000000000000000000000000000000000002").unwrap(),
 	)
 }
 
-pub const ALICE: AccountId = AccountId::new([1u8; 32]);
-pub const BOB: AccountId = AccountId::new([2u8; 32]);
+pub const TRILLIAN: AccountId = AccountId::new([1u8; 32]);
+pub const FORD: AccountId = AccountId::new([2u8; 32]);
 pub const EVA: AccountId = AccountId::new([5u8; 32]);
 
 pub const ID_1: LockIdentifier = *b"1       ";
@@ -223,10 +223,10 @@ impl ExtBuilder {
 
 	pub fn one_hundred_for_alice_n_bob(self) -> Self {
 		self.balances(vec![
-			(ALICE, NATIVE_CURRENCY_ID, 100),
-			(BOB, NATIVE_CURRENCY_ID, 100),
-			(ALICE, X_TOKEN_ID, 100),
-			(BOB, X_TOKEN_ID, 100),
+			(TRILLIAN, NATIVE_CURRENCY_ID, 100),
+			(FORD, NATIVE_CURRENCY_ID, 100),
+			(TRILLIAN, X_TOKEN_ID, 100),
+			(FORD, X_TOKEN_ID, 100),
 		])
 	}
 

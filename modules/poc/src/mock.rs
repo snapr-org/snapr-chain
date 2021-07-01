@@ -116,8 +116,8 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 	// inject test balances
 	pallet_balances::GenesisConfig::<Runtime>{
 		balances: vec![
-			(0, 1_000_000), // alice
-			(1, 1_000_000), // bob
+			(0, 1_000_000), // trillian
+			(1, 1_000_000), // ford
 			(2, 1_000_000), // charlie
 			(3, 1_000_000), // eve
 		],

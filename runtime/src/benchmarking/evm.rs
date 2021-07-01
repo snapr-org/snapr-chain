@@ -1,6 +1,6 @@
 use crate::{AccountId, Balance, Event, EvmAccounts, Origin, Runtime, System, DOLLARS, Evm};
 
-use super::utils::set_reef_balance;
+use super::utils::set_snapr_balance;
 use frame_support::dispatch::DispatchError;
 use frame_system::RawOrigin;
 use orml_benchmarking::runtime_benchmarks;
@@ -13,12 +13,12 @@ fn dollar(d: u32) -> Balance {
 	DOLLARS.saturating_mul(d)
 }
 
-fn alice() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Alice")).unwrap()
+fn trillian() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Trillian")).unwrap()
 }
 
-fn bob() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Bob")).unwrap()
+fn ford() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Ford")).unwrap()
 }
 
 fn deploy_contract(caller: AccountId) -> Result<H160, DispatchError> {
@@ -48,7 +48,7 @@ fn deploy_contract(caller: AccountId) -> Result<H160, DispatchError> {
 }
 
 pub fn alice_account_id() -> AccountId {
-	let address = EvmAccounts::eth_address(&alice());
+	let address = EvmAccounts::eth_address(&trillian());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);
@@ -56,7 +56,7 @@ pub fn alice_account_id() -> AccountId {
 }
 
 pub fn bob_account_id() -> AccountId {
-	let address = EvmAccounts::eth_address(&bob());
+	let address = EvmAccounts::eth_address(&ford());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);
@@ -69,35 +69,35 @@ runtime_benchmarks! {
 	_ {}
 
 	transfer_maintainer {
-		set_reef_balance(&alice_account_id(), dollar(1000));
-		set_reef_balance(&bob_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&bob_account_id(), dollar(1000));
 		let contract = deploy_contract(alice_account_id())?;
-		let bob_address = EvmAccounts::eth_address(&bob());
+		let bob_address = EvmAccounts::eth_address(&ford());
 	}: _(RawOrigin::Signed(alice_account_id()), contract, bob_address)
 
 	deploy {
-		set_reef_balance(&alice_account_id(), dollar(1000));
-		set_reef_balance(&bob_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&bob_account_id(), dollar(1000));
 		let contract = deploy_contract(alice_account_id())?;
 	}: _(RawOrigin::Signed(alice_account_id()), contract)
 
 	deploy_free {
-		set_reef_balance(&alice_account_id(), dollar(1000));
-		set_reef_balance(&bob_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&bob_account_id(), dollar(1000));
 		let contract = deploy_contract(alice_account_id())?;
 	}: _(RawOrigin::Root, contract)
 
 	enable_contract_development {
-		set_reef_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
 	}: _(RawOrigin::Signed(alice_account_id()))
 
 	disable_contract_development {
-		set_reef_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
 		Evm::enable_contract_development(Origin::signed(alice_account_id()))?;
 	}: _(RawOrigin::Signed(alice_account_id()))
 
 	set_code {
-		set_reef_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
 		let contract = deploy_contract(alice_account_id())?;
 
 		let new_contract = hex_literal::hex!("608060405234801561001057600080fd5b5061016f806100206000396000f3fe608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063412a5a6d14610046575b600080fd5b61004e610050565b005b600061005a6100e2565b604051809103906000f080158015610076573d6000803e3d6000fd5b50905060008190806001815401808255809150509060018203906000526020600020016000909192909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050565b6040516052806100f28339019056fe6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a7230582092dc1966a8880ddf11e067f9dd56a632c11a78a4afd4a9f05924d427367958cc0029a165627a7a723058202b2cc7384e11c452cdbf39b68dada2d5e10a632cc0174a354b8b8c83237e28a400291234").to_vec();
@@ -105,7 +105,7 @@ runtime_benchmarks! {
 	}: _(RawOrigin::Signed(alice_account_id()), contract, new_contract)
 
 	selfdestruct {
-		set_reef_balance(&alice_account_id(), dollar(1000));
+		set_snapr_balance(&alice_account_id(), dollar(1000));
 		let contract = deploy_contract(alice_account_id())?;
 	}: _(RawOrigin::Signed(alice_account_id()), contract)
 }

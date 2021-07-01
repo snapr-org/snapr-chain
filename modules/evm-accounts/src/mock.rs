@@ -13,8 +13,8 @@ use sp_runtime::{testing::Header, traits::IdentityLookup};
 pub type AccountId = AccountId32;
 pub type BlockNumber = u64;
 
-pub const ALICE: AccountId = AccountId32::new([0u8; 32]);
-pub const BOB: AccountId = AccountId32::new([1u8; 32]);
+pub const TRILLIAN: AccountId = AccountId32::new([0u8; 32]);
+pub const FORD: AccountId = AccountId32::new([1u8; 32]);
 
 mod evm_accounts {
 	pub use super::super::*;
@@ -79,7 +79,7 @@ impl orml_tokens::Config for Runtime {
 }
 
 parameter_types! {
-	pub const GetNativeCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::REEF);
+	pub const GetNativeCurrencyId: CurrencyId = CurrencyId::Token(TokenSymbol::SNAPR);
 }
 
 impl orml_currencies::Config for Runtime {
@@ -150,16 +150,16 @@ impl ExtBuilder {
 	}
 }
 
-pub fn alice() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Alice")).unwrap()
+pub fn trillian() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Trillian")).unwrap()
 }
 
-pub fn bob() -> secp256k1::SecretKey {
-	secp256k1::SecretKey::parse(&keccak_256(b"Bob")).unwrap()
+pub fn ford() -> secp256k1::SecretKey {
+	secp256k1::SecretKey::parse(&keccak_256(b"Ford")).unwrap()
 }
 
 pub fn bob_account_id() -> AccountId {
-	let address = EvmAccountsModule::eth_address(&bob());
+	let address = EvmAccountsModule::eth_address(&ford());
 	let mut data = [0u8; 32];
 	data[0..4].copy_from_slice(b"evm:");
 	data[4..24].copy_from_slice(&address[..]);

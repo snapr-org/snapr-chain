@@ -1,10 +1,10 @@
 [package]
-authors = ['Reef Finance <https://reef.finance>']
+authors = ['snapr developers <https://snapr.org>']
 edition = '2018'
-homepage = 'https://reef.finance'
+homepage = 'https://snapr.org'
 license = 'Unlicense'
-name = 'reef-runtime'
-repository = 'https://github.com/reef-defi/reef-chain'
+name = 'snapr-runtime'
+repository = 'https://github.com/snapr-defi/snapr-chain'
 version = '3.0.0'
 
 [package.metadata.docs.rs]
@@ -93,7 +93,7 @@ module-evm-rpc-runtime-api = { path = "../modules/evm/rpc/runtime_api",  default
 module-transaction-payment = { path = "../modules/transaction_payment", default-features = false }
 module-support = { path = "../modules/support", default-features = false }
 
-primitives = { package = "reef-primitives", path = "../primitives", default-features = false }
+primitives = { package = "snapr-primitives", path = "../primitives", default-features = false }
 runtime-common = { path = "common", default-features = false }
 
 
