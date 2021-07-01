@@ -1,14 +1,11 @@
-name: Rust
-
+---
+name: release
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: "**"
-
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+*
 env:
   CARGO_TERM_COLOR: always
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,9 +20,9 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: build-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Init
+    - name: init
       run: make init
-    - name: Build
+    - name: build
       run: make build
   test:
     runs-on: ubuntu-latest
@@ -40,9 +37,9 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: test-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Init
+    - name: init
       run: make init
-    - name: Test
+    - name: test
       run: make test
   clippy:
     runs-on: ubuntu-latest
@@ -57,7 +54,35 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: clippy-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Init
+    - name: init
       run: make init
-    - name: Clippy
+    - name: clippy
       run: make clippy
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: build-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+    - name: init
+      run: make init
+    - name: release
+      run: make release
+    - name: strip
+      run: strip target/release/snapr
+    - name: rename
+      run: mv target/release/snapr target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
+    - name: publish
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: |
+          target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
