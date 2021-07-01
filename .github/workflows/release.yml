@@ -59,8 +59,20 @@ jobs:
     - name: clippy
       run: make clippy
   release:
+    needs:
+    - build
+    - test
+    - clippy
     runs-on: ubuntu-latest
     steps:
+    - name: parse-tag
+      id: parse_tag
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        result-encoding: string
+        script: |
+          return context.payload.ref.replace(/refs\/tags\//, '')
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
       with:
