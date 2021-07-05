@@ -1,0 +1,106 @@
+---
+authority:
+  trillian:
+    babe:
+      hex: 14f21e28172b1d083ba736be6fbfc2e4c386560ade907ffa4f3dbab70c9d7543
+      ss58: 5CYAjonvUYhA2cju7yhtnCRaz2tpseaWsyAZDVRGZ6A3vbgP
+    grandpa:
+      hex: 5eea7941d6e9cda5cc5b8c5d25d661f42d29510d1d31374334d940b4b71d89a8
+      ss58: 5EDA1d6zAcx9u4aNynVvQazK6CSVbbY5bzJGREGtqVQEruTm
+    controller:
+      hex: a2fc33f65dfb2fbcc1647bf1edc77111db200a25909f7e1f58415fa43ffa2319
+      ss58: 5FkQXx2eiePb2EaDo8ADEHegjNmUsfrgCeJbLuxpVD4oxWyS
+    stash:
+      hex: 42ae843b1884a7dad1c1b57d1b6835c803d56dc5124fd011c4ee526d3595a950
+      ss58: 5Da8rpacfvVBfA4ZDEDeMgA2K61r9pEVHjmZvbfMMQZdsgtL
+    im-online:
+      hex: 8c1e22a91b62be0afe8ab2b91535c14a1ffbb06843903381de4d1379e6619b2c
+      ss58: 5FERWiKjwqEhR9GhPiLBxxWScXcHeKAGSyPLXcVLrLw3nf6n
+    authority-discovery:
+      hex: 2c011a9b731ea816ce7906f052785444e4532509458420d4e56e4c9996800237
+      ss58: 5D4QHtd8JZGnj6fvKYksjLw6ioT6LpL6Rp8YV1RmnH11831W
+  ford:
+    babe:
+      hex: b252bf4260fc345aa96b9eb542ea86173a7ef6e8753bc1785e1078ecb68b7872
+      ss58: 5G6WxjHdLrYCV3nBtXFixxCY3cbc3EWnbpRwKT3hoPyR5Kj6
+    grandpa:
+      hex: f4277a95fa2b02f624aaa37f4e05cac490528a9c8bc0667cd722f7d754b61df7
+      ss58: 5HaqGY9c6TN1tR8fdkC34eQy5nun2jF38V88ep1cm1WuzCmR
+    controller:
+      hex: 9e41571ca43ad80d6bef0522d18ee2c00cc8b6a60bd81af06574890b4e639045
+      ss58: 5FeCqGfwZPVbF5CPCE84AM9YzE2ybmL6wYWk9ZyoFuJM13Xg
+    stash:
+      hex: 5a3bfe14fade25abe22c0ba1adeccce2da6dd1280e2a5e7290fee2587ccd8239
+      ss58: 5E71zGq9vJYCmjBYtQEU1ghv3XaGGkF4FhvwBPy4p8oyx9mZ
+    im-online:
+      hex: b0f7f9438457899736d4576c25bc13299051f52bfb2aae92a908259ea787b313
+      ss58: 5G4jwxofyuDfnQuxwqSqMyuAsX6mGmrYQXucucgRtac5L5CG
+    authority-discovery:
+      hex: ea4ff8ba42aac238abfcf6d2efe361b0ec49c30af1910952fc66e0939587aa61
+      ss58: 5HMvpSP5taGRNExVvhmGEP3dnK45PadzuZK3Y5kqHQs3VvrE
+  arthur:
+    babe:
+      hex: 162b9eb321baf0e6eb2fd8656bda89d3a7b3fe833ff07ad04df75d8cac4daf38
+      ss58: 5CZmsKi5mrw2KSrXn8LfWG1GU6fodgxELYZ8D3vbXUVQ3cBs
+    grandpa:
+      hex: 8bd99f8054261eced5b5f49f6167d1c6a487b23f3afdee1b18256f4f6cc1e984
+      ss58: 5FE5AGo4mJrdnDQSAEwwWK5WNWVZkUAdV5Vn4V1c1K55wZXN
+    controller:
+      hex: 4e532c021d8d8bcec806c13cec73a426b211464ecfc7f31dfa7c0730c5041922
+      ss58: 5DqQJKPBbRp9jsB8DAMtWA3ikwwmTPxmyYPRn2FkB7dVdwAi
+    stash:
+      hex: c6de0d27a5f5fef73140623048d7ada46b110a3ffe8840d5ac205e13f4fc096b
+      ss58: 5GZTJS4uxmkPbTFcvSSKkCga26SNLgLDSDJKbQTchyMvHtit
+    im-online:
+      hex: 681818fb1b2bcd5fbe7cd8b52a33b7070c2f2f8c7d9ba3cf6e9a4745ba2d7b06
+      ss58: 5ERBzhcGFENfySR6MVCpjevmTsxfiYhchzxFAcftKa8WbQiT
+    authority-discovery:
+      hex: a4705df44520560d060e824dfd3658b8e71bb2a4b59af17999d8c23008e98957
+      ss58: 5FnK6BmnwksEEu46EUNGxA3rThqkvT3VRDddVdnBxUU8Ysy4
+endowed:
+  liquidity:
+    hex: bcdc6aba7c7ebae25b86bb4063d96513b6a4207c930c1a028ea1bc4d5d53c43a
+    ss58: 5GLLLVs9YMCKQ5DDdL9BKZvj5qBvm9rpZRrHc52hEzZqDbgB
+  core:
+    hex: f00837816863d7c15e8d2212e61d839fa8695a95e73f13c6b13993e04a2d2167
+    ss58: 5HVRno9617UQVBcBE44wymYFzfqVNM5nMpActJ4ynr2XPJ6c
+  contributor:
+    hex: 66fec156de16e477a064fdc92b54622ee6a48e5d4889c293708b746c771ad934
+    ss58: 5EPkRHVPpsjvc5D3WeLZMjxFQqB75iBygzsakYWTVfUfykHw
+  sudo:
+    hex: 04dc253de4b52d8b947f1ae6026d44240f378b4ec1333609a40c2217a0de3907
+    ss58: 5CB5So8pPFqBn32smjZW41fLqjXHk4VKiigvgbw87upGX19j
+faucet:
+  stash:
+    hex: 3a61b975212ee8ab72872f4127974277f245cbdda8dd64e03d88f9761aff0007
+    ss58: 5DPFfWHy3fgabqeQcNFjG9JreJoCVuR854a2D4FTtY8Q7vKC
+  2021:
+    hex: 52c0277f330e8332b15267548fb119c1afcacd68ab9229d1fe970e33e3992d58
+    ss58: 5DwCs9dgyvr9BER9tgzyqQDMPBpifShXrgYjn8aej5EWnFAH
+  2022:
+    hex: 1ccefc6d33515bac7a248c0af5d05efd122dba5ecfe35a1d497a53f1a6957c33
+    ss58: 5CiUgiiFhKNBiax2UFAPxrgXZyhhZQS1XZFeQ2ebjVgjHiK6
+  2023:
+    hex: 529a52f5009e9f42ec2faca1572e4f87d5a926fc3cfd4893e4d6c68533f1e67e
+    ss58: 5Dw1dMFKgT5FGPbD5irLDZBVHTKY9URZwXx4uFFvAsSceA4n
+  2024:
+    hex: 4ee0ba3bd9cfb7fa85578172331d664147087f0184c501d357d29f5a5784a460
+    ss58: 5Dr8MGEPwkmuHUzHJq8Gp9uwSkrQVP8wcDwGwXShHVycYRUR
+  2025:
+    hex: 94fce3f43f739eda844fdd341c25fd3abc3e523e3435120d45f8cd2ecfb8f831
+    ss58: 5FS44urCqbF5m8sT9c9CVbkCHPMhcXNanp83pTsx9AhHJ841
+  2026:
+    hex: 14da468553190e6d2fb94357bce68a1fae7c4e14b90122dfc7e19cf507cd6c1d
+    ss58: 5CY3f1knuoKR1PUX8sRAi2poWKjs3Vhi2y1SdGcC7fstG6W2
+  2027:
+    hex: c0fc619206e2fe291cce2e00786d958a79020d959e5746206b487e8699c0e67d
+    ss58: 5GRk2Lb5VYL8kieYf7yHNVdy5WgNWjso2s6zLPGciYR3a2Fe
+  2028:
+    hex: 94786df8d1b0f499bad7bd5bc36b3246cea0a95be239db2015cdbba568e6e925
+    ss58: 5FRNifVDX84wXCPggWHUrYbj1HxJeNqSqVTs6EZjkJvyH3Y1
+  2029:
+    hex: 2e6018f73c139d9c268dcc87b7a44d76282c39faaf311094090e3a13028f815c
+    ss58: 5D7Wc9UTTStDm4hfNUCaSY1u3SdWpBUP5yb2QADRTopfCzA6
+  2030:
+    hex: 64aed39ca83c95cc132d3859b4a9dfa06145ed6abfbec6032733c30d4902f23f
+    ss58: 5ELiabK3WezseAqatwTpsrivrR7w291nEpisSQsqYhGoTC27

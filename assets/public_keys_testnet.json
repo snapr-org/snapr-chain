@@ -1,0 +1,146 @@
+{
+  "authority": {
+    "trillian": {
+      "babe": {
+        "hex": "a81a913d800e00b6a3195f8a46b1e31295594458c70f7394354f1998acd52054",
+        "ss58": "5Fs7o14zsu1YAbpCUc4jz1K5wDw6UsuLeTQxroZaamvjf2TK"
+      },
+      "grandpa": {
+        "hex": "580224742778d565c81997d7138249774451c20ebd409e6e0101acac243348e1",
+        "ss58": "5E46hz5Za3KKpCbs2d13gepG6hBfYq8GTCyvc63YByAz2Aee"
+      },
+      "controller": {
+        "hex": "1e062e1cf4e8b43f4b1e4d6b57cdcb562ee90789eb0f20d0d7b128b4c538757d",
+        "ss58": "5Ck58UAwF282jSy9ZYrxwRfv4MWofxSFqtpZmfQknTuy6Vns"
+      },
+      "stash": {
+        "hex": "c870ed11d1d98d8343375a08925f53ff8f9ce437623f89adac7f91f6bd1d6b35",
+        "ss58": "5GbWyoTvbq5FcK1WXCzBPuMqV9rmRsfCfsLVRR67B4NZXiaP"
+      },
+      "im-online": {
+        "hex": "a8d34967c54e60a44c08ca55bb900d7ddedbdf6ac8d7e1d38e64fc65e432d21b",
+        "ss58": "5Ft4feFbSot3G4NbDxNefiDqfLfpyqZqDV8YywEbwyYqKQFh"
+      },
+      "authority-discovery": {
+        "hex": "dad7af38a21987496b34cd8a2d27fb75e99a6f3a1297e8c706b2d0019c245448",
+        "ss58": "5H1eNHAzpjuGq2ekWVxiQwnUcnFSo6bu4WHiprTLW5XF1NKv"
+      }
+    },
+    "ford": {
+      "babe": {
+        "hex": "7ccbccddb2bc248b8f38d45a4c78d9b4af6a92171572507056864f10e7719127",
+        "ss58": "5EtLLTBbKcSENpmUsZ3Hc66hSJst5kHpia5Qb9Amw1yetgCd"
+      },
+      "grandpa": {
+        "hex": "e7079e181fe7d4a1ffd40fd5595a8ca1ed31c94d203aba6514e1dde63951ea95",
+        "ss58": "5HHdBUXfvwcY5T2gz2bJaNMMQMK4AcHxBDY6kEKJuEizENed"
+      },
+      "controller": {
+        "hex": "f2b7edc424c1f6e7b878e7f3b4ad8b521c352576076ba83b3fec226597fffb46",
+        "ss58": "5HYx5oCvuTsDGA4UdMaqjWBALBUm4WRb8okG2NfvYnuNidoA"
+      },
+      "stash": {
+        "hex": "420d9c9edfae0de458861800ae68a73c9a4e69739dc553baa0db0f988bf57d0f",
+        "ss58": "5DZK4VnyS7wVpQKM5tcAeC9fch1EgAcSa9TjY78DcwevHR4o"
+      },
+      "im-online": {
+        "hex": "82ad236ecb5661038077f8fbabe54a63945e344705aa75a86f494777f1722121",
+        "ss58": "5F23WpnmiQgJVNjauCYu3ucmdaRMZ8QeHpzi8X97rADp2uin"
+      },
+      "authority-discovery": {
+        "hex": "7a30ce6370fd53297f9ff3a4fe8de374ccfc2e18f7d7672182de6eebdab45772",
+        "ss58": "5EpvCQs5KUPA7BpMnuU6tQrxvWFao1oWddK5PRytPHKKxJxV"
+      }
+    },
+    "arthur": {
+      "babe": {
+        "hex": "2a38806dda6c67a2932a8af2bc7963f2881b100fd89794760c956e3a1387da04",
+        "ss58": "5D24epM1WmBWLp7KvQDLwBHSBWJCfqxAnfz3c64MAax5pptf"
+      },
+      "grandpa": {
+        "hex": "6df0b76c503bebbc94484c2041289163ea8ec6e1b472d19e496f1a1dfe1cfc2f",
+        "ss58": "5EYraqwFxugDJgp1vrTyspGA6ygKiFVnUMve2ckwa1AqGbGh"
+      },
+      "controller": {
+        "hex": "a2ebbcd164e4545759db70fde6f40212cedb5afa05a8fd425a11883219eb6d3b",
+        "ss58": "5FkKeFsWJGfgicgt7jmxVdMvjVSLExzZPKrnhikLarHrvJaK"
+      },
+      "stash": {
+        "hex": "a279d057de39911140fe8b930e000adc7bb6a89deabe9f03f4d0b589918e627a",
+        "ss58": "5FjjoPyvuRSWtv15FYYRpjhL9C3RSjos4txzhTZqat6XBkdr"
+      },
+      "im-online": {
+        "hex": "c88388964bca32b4857cfac1a2b1be3b7c70025f9cd762ced947df33da546c62",
+        "ss58": "5GbcWQExBEs7Z9tR5nWpn41ffHkquj7VuH2GqkiszuUL14rz"
+      },
+      "authority-discovery": {
+        "hex": "3c0f2bfd025fa4fc59a46113003ad1be991af55329de98fd43623d7fd57ef41a",
+        "ss58": "5DRTEiFchLD6iJtdPqS2tRFVQaFQ26ZUM52hePHAnHhUkPGk"
+      }
+    }
+  },
+  "endowed": {
+    "liquidity": {
+      "hex": "1e8811e1d626f700bc77000a616bd6023921d0200a4f6d0365b1bf866ba57704",
+      "ss58": "5CkjiR9R55Hr9RNTQjg5G9kW8vNcnwY4EEw88ahVuAcqCe9u"
+    },
+    "core": {
+      "hex": "f0e801be534460a020079b48879eeaa83f54292232160fe1f9235b73997d6304",
+      "ss58": "5HWaGcDy53EQ9WvnAXHDoiM43hDmSgjW1RoPGTc3MbEnC5jT"
+    },
+    "contributor": {
+      "hex": "8c536431b197223f298198b29a319a6913db6594c45df6ffe0891d2b1f95475b",
+      "ss58": "5FEhLHvgZK7eaHefjHR2hioTpuh8KLvoHgkpt3FTNsJ7PS8x"
+    },
+    "sudo": {
+      "hex": "461998dda5ef0400a5f76eff16b83aa85a740d63b5f529a5f86de60441f4a110",
+      "ss58": "5Decp7Gq7zKqN94MX6cLg75mW5rbeFehA2iw7vdRRBqrEpBc"
+    }
+  },
+  "faucet": {
+    "stash": {
+      "hex": "563a7cd622c9faa1056b212542ab1bd68e22a80e4178e4c2dab794822c3d8158",
+      "ss58": "5E1mMEf695sbuwVDs1P3VW1bJG6Lah3F6azFWpv7xz7yycQ1"
+    },
+    "2021": {
+      "hex": "9e9c0de1dadbcc5d8f2fae0183e82ec2c07d3982ff93b507f69d81a1a6806e3f",
+      "ss58": "5FefnEdv3iDgEWrxSxwjTZkH5LSAAKhjSN1cNuyaEPKFRCut"
+    },
+    "2022": {
+      "hex": "665b3d89dc113e19d0c449619068a0aac149f706aaf9eb86e586bfc48ecb3f50",
+      "ss58": "5ENuqzNGFVakT91m1sCygs6AmxeHf8F4nzFKj4Xt8zKm3kKC"
+    },
+    "2023": {
+      "hex": "ee0c398fed6fae83588c7acff73d7c815b291f680a5182d74ad2a1bfbd59e375",
+      "ss58": "5HSptJGTwY6xGAxiNAKbCVWxyGaJUcwtZBkFfKD5JB7Do3FU"
+    },
+    "2024": {
+      "hex": "5c405f5690d3bc456d08a38ddeafebca7606f8016e91a0256abf40b1866a1209",
+      "ss58": "5E9fPHux1AM4MdVHQdJaUCLFuwvJ5tKvrjuavxGvB6FqWpC5"
+    },
+    "2025": {
+      "hex": "02e62d4daaa5c7de58069b724c5072afd6bf81a73249ec9e4843d88aed44f165",
+      "ss58": "5C8WL5byUhDgp2WhZU8v97LWnoSYGqTcMkzh9FWsHmK5dsG6"
+    },
+    "2026": {
+      "hex": "b02690e9c6654c8753cb9c4e3b60d4b223ceb5a30f25bdd1ff2cd3dffbc80824",
+      "ss58": "5G3fjxGSehjNoAcUGAoPMUqg5WYuHo7cArnHUEc1kYDmphDA"
+    },
+    "2027": {
+      "hex": "62399a6575b8b36e084c3dad0bf2a150ef27d06cf4697d27f974b36ee0385677",
+      "ss58": "5EHVfKjs5ZWEchSbERXUibWRdYkFmdpMTVPGVLSezABhWrxv"
+    },
+    "2028": {
+      "hex": "f0abd4e2e70e02285db5b2ce2c290431c3bda21357151dd84cea43ffcb168b4f",
+      "ss58": "5HWGPp7jSwwwNGhAqZAvHVCxqLv4d3a4TJgHiZhao35Nezfx"
+    },
+    "2029": {
+      "hex": "52a331e8015fd252feae8db54b13c254ff11a800bdbbbac3444d0817484a2821",
+      "ss58": "5Dw4GC5i8B3qL5eSckFUEu5eRqsemN7QnaXYMRtavR3DJuqS"
+    },
+    "2030": {
+      "hex": "1864b3de2f1250c4e2f5eb7044ede90c0b964b1914a197b44600dd4f07ea3026",
+      "ss58": "5CcgvPZcA7URgNZ32tVWUPcJD2dPTXM7K9wBWnNhUS34bwgt"
+    }
+  }
+}
