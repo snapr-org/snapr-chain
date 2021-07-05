@@ -378,11 +378,10 @@ pub fn mainnet_config() -> Result<ChainSpec, String> {
 		),
 
 		// bootnodes
-    // todo: node key corrections required
 		vec![
-	    "/dns/trillian.snapr.com/tcp/30333/p2p/12D3KooWCT7rnUmEK7anTp7svwr4GTs6k3XXnSjmgTcNvdzWzgWU".parse().unwrap(),
-	    "/dns/ford.snapr.net/tcp/30333/p2p/12D3KooWFHSc9cUcyNtavUkLg4VBAeBnYNgy713BnovUa9WNY5pp".parse().unwrap(),
-	    "/dns/arthur.snapr.org/tcp/30333/p2p/12D3KooWAQqcXvcvt4eVEgogpDLAdGWgR5bY1drew44We6FfJAYq".parse().unwrap(),
+	    "/dns/trillian.snapr.com/tcp/30333/p2p/12D3KooWPk8QPjuqZXoAN5zWQnJaMUbSFphr7r7xK5mYRoVAKWWR".parse().unwrap(),
+	    "/dns/ford.snapr.net/tcp/30333/p2p/12D3KooWNzrXuoszm6hADaHhDQzN6esQksUKYaVp665Ej5owuxvW".parse().unwrap(),
+	    "/dns/arthur.snapr.org/tcp/30333/p2p/12D3KooWQsQrmhpk1Ai38tVXvYFMsRnPXSy6z1EEXiZGt7vyikVb".parse().unwrap(),
 		],
 
 		// telemetry
