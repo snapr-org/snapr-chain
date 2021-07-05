@@ -32,6 +32,7 @@ for chain_name in testnet mainnet; do
     fi
 
     echo "    babe:" >> ${assets_dir}/public_keys_${chain_name}.yml
+    echo "      scheme: sr25519" >> ${assets_dir}/public_keys_${chain_name}.yml
 
     public_key_sr25519_hex=$(grep -Po '(?<=Public key \(hex\):  0x)[^`]*(?=$)' ${genesis_key_mount_point}/${chain_name}/authority/${key_name}/babe/sr25519 | cat)
     echo "      hex: ${public_key_sr25519_hex}" >> ${assets_dir}/public_keys_${chain_name}.yml
@@ -46,6 +47,7 @@ for chain_name in testnet mainnet; do
     fi
 
     echo "    grandpa:" >> ${assets_dir}/public_keys_${chain_name}.yml
+    echo "      scheme: ed25519" >> ${assets_dir}/public_keys_${chain_name}.yml
 
     public_key_ed25519_hex=$(grep -Po '(?<=Public key \(hex\):  0x)[^`]*(?=$)' ${genesis_key_mount_point}/${chain_name}/authority/${key_name}/grandpa/ed25519 | cat)
     echo "      hex: ${public_key_ed25519_hex}" >> ${assets_dir}/public_keys_${chain_name}.yml
@@ -65,6 +67,7 @@ for chain_name in testnet mainnet; do
       fi
 
       echo "    ${key_variant}:" >> ${assets_dir}/public_keys_${chain_name}.yml
+      echo "      scheme: sr25519" >> ${assets_dir}/public_keys_${chain_name}.yml
 
       public_key_sr25519_hex=$(grep -Po '(?<=Public key \(hex\):  0x)[^`]*(?=$)' ${genesis_key_mount_point}/${chain_name}/authority/${key_name}/${key_variant}/sr25519 | cat)
       echo "      hex: ${public_key_sr25519_hex}" >> ${assets_dir}/public_keys_${chain_name}.yml
@@ -80,6 +83,7 @@ for chain_name in testnet mainnet; do
   for key_name in liquidity core contributor sudo; do
 
     echo "  ${key_name}:" >> ${assets_dir}/public_keys_${chain_name}.yml
+    echo "    scheme: sr25519" >> ${assets_dir}/public_keys_${chain_name}.yml
 
     # create key folder
     if [ ! -d ${genesis_key_mount_point}/${chain_name}/endowed/${key_name} ]; then
@@ -103,6 +107,7 @@ for chain_name in testnet mainnet; do
   for key_name in stash 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030; do
 
     echo "  ${key_name}:" >> ${assets_dir}/public_keys_${chain_name}.yml
+    echo "    scheme: sr25519" >> ${assets_dir}/public_keys_${chain_name}.yml
 
     # create key folder
     if [ ! -d ${genesis_key_mount_point}/${chain_name}/faucet/${key_name} ]; then
