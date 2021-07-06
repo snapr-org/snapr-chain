@@ -1,4 +1,4 @@
-use crate::{AccountId, Balance, EvmAccounts, Runtime, DOLLARS};
+use crate::{AccountId, Balance, EvmAccounts, Runtime, EUROS};
 
 use super::utils::set_snapr_balance;
 use codec::Encode;
@@ -10,9 +10,9 @@ use sp_std::prelude::*;
 
 const SEED: u32 = 0;
 
-fn dollar(d: u32) -> Balance {
+fn euro(d: u32) -> Balance {
 	let d: Balance = d.into();
-	DOLLARS.saturating_mul(d)
+	EUROS.saturating_mul(d)
 }
 
 fn trillian() -> secp256k1::SecretKey {
@@ -39,7 +39,7 @@ runtime_benchmarks! {
 	claim_account {
 		let caller: AccountId = account("caller", 0, SEED);
 		let eth: AccountId = account("eth", 0, SEED);
-		set_snapr_balance(&bob_account_id(), dollar(1000));
+		set_snapr_balance(&bob_account_id(), euro(1000));
 	}: _(RawOrigin::Signed(caller), EvmAccounts::eth_address(&trillian()), EvmAccounts::eth_sign(&trillian(), &caller.encode(), &[][..]))
 
 	claim_default_account {

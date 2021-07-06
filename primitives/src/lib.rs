@@ -43,10 +43,10 @@ pub const MIRRORED_TOKENS_ADDRESS_START: u64 = 0x01000000;
 pub mod currency {
 	use super::Balance;
 
-	pub const DOLLARS: Balance = 1_000_000_000_000_000_000;
-	pub const CENTS: Balance = DOLLARS / 100;
+	pub const EUROS: Balance = 1_000_000_000_000_000_000;
+	pub const CENTS: Balance = EUROS / 100;
 
-	pub const SNAPR: Balance = DOLLARS;
+	pub const SNAPR: Balance = EUROS;
 	pub const MILLI_SNAPR: Balance = SNAPR / 1_000;
 	pub const MICRO_SNAPR: Balance = SNAPR / 1_000_000;
 }
@@ -94,9 +94,8 @@ pub type AccountPublic = <Signature as Verify>::Signer;
 /// `AccountId32`. This is always 32 bytes.
 pub type AccountId = <AccountPublic as IdentifyAccount>::AccountId;
 
-/// The type for looking up accounts. We don't expect more than 4 billion of
-/// them.
-pub type AccountIndex = u32;
+/// expect more than 4 billion accounts
+pub type AccountIndex = u64;
 
 /// Index of a transaction in the chain. 32-bit should be plenty.
 pub type Nonce = u32;
