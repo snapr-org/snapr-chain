@@ -76,11 +76,11 @@ jobs:
       - name: strip
         run: strip target/release/snapr-node
       - name: rename
-        run: mv target/release/snapr-node target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
+        run: mv target/release/snapr-node target/release/snapr_${{ steps.parse_tag.outputs.result }}-x86_64-linux-gnu
       - name: publish
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            target/release/snapr_${{ steps.parse_tag.outputs.result }}_amd64
+            target/release/snapr_${{ steps.parse_tag.outputs.result }}-x86_64-linux-gnu
