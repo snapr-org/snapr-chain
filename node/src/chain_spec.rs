@@ -355,25 +355,25 @@ pub fn mainnet_config() -> Result<ChainSpec, String> {
 				// faucet stash (see: https://en.wikipedia.org/wiki/projections_of_population_growth)
 				(hex!["3a61b975212ee8ab72872f4127974277f245cbdda8dd64e03d88f9761aff0007"].into(), 1 as u128),
 				// faucet 2021 stash
-				(hex!["52c0277f330e8332b15267548fb119c1afcacd68ab9229d1fe970e33e3992d58"].into(), 7_874_965_732 as u128),
+				(hex!["52c0277f330e8332b15267548fb119c1afcacd68ab9229d1fe970e33e3992d58"].into(), 2_874_362_492_180 as u128),
 				// faucet 2022 stash
-				(hex!["1ccefc6d33515bac7a248c0af5d05efd122dba5ecfe35a1d497a53f1a6957c33"].into(), 7_953_952_577 as u128),
+				(hex!["1ccefc6d33515bac7a248c0af5d05efd122dba5ecfe35a1d497a53f1a6957c33"].into(), 2_903_192_690_605 as u128),
 				// faucet 2023 stash
-				(hex!["529a52f5009e9f42ec2faca1572e4f87d5a926fc3cfd4893e4d6c68533f1e67e"].into(), 8_031_800_338 as u128),
+				(hex!["529a52f5009e9f42ec2faca1572e4f87d5a926fc3cfd4893e4d6c68533f1e67e"].into(), 2_931_607_123_370 as u128),
 				// faucet 2024 stash
-				(hex!["4ee0ba3bd9cfb7fa85578172331d664147087f0184c501d357d29f5a5784a460"].into(), 8_108_605_255 as u128),
+				(hex!["4ee0ba3bd9cfb7fa85578172331d664147087f0184c501d357d29f5a5784a460"].into(), 2_967_749_523_330 as u128),
 				// faucet 2025 stash
-				(hex!["94fce3f43f739eda844fdd341c25fd3abc3e523e3435120d45f8cd2ecfb8f831"].into(), 8_184_437_453 as u128),
+				(hex!["94fce3f43f739eda844fdd341c25fd3abc3e523e3435120d45f8cd2ecfb8f831"].into(), 2_987_319_670_345 as u128),
 				// faucet 2026 stash
-				(hex!["14da468553190e6d2fb94357bce68a1fae7c4e14b90122dfc7e19cf507cd6c1d"].into(), 8_259_276_651 as u128),
+				(hex!["14da468553190e6d2fb94357bce68a1fae7c4e14b90122dfc7e19cf507cd6c1d"].into(), 3_014_635_977_615 as u128),
 				// faucet 2027 stash
-				(hex!["c0fc619206e2fe291cce2e00786d958a79020d959e5746206b487e8699c0e67d"].into(), 8_333_078_318 as u128),
+				(hex!["c0fc619206e2fe291cce2e00786d958a79020d959e5746206b487e8699c0e67d"].into(), 3_041_573_586_070 as u128),
 				// faucet 2028 stash
-				(hex!["94786df8d1b0f499bad7bd5bc36b3246cea0a95be239db2015cdbba568e6e925"].into(), 8_405_863_301 as u128),
+				(hex!["94786df8d1b0f499bad7bd5bc36b3246cea0a95be239db2015cdbba568e6e925"].into(), 3_076_545_968_166 as u128),
 				// faucet 2029 stash
-				(hex!["2e6018f73c139d9c268dcc87b7a44d76282c39faaf311094090e3a13028f815c"].into(), 8_477_660_723 as u128),
+				(hex!["2e6018f73c139d9c268dcc87b7a44d76282c39faaf311094090e3a13028f815c"].into(), 3_094_346_163_895 as u128),
 				// faucet 2030 stash
-				(hex!["64aed39ca83c95cc132d3859b4a9dfa06145ed6abfbec6032733c30d4902f23f"].into(), 8_548_487_371 as u128),
+				(hex!["64aed39ca83c95cc132d3859b4a9dfa06145ed6abfbec6032733c30d4902f23f"].into(), 3_120_197_890_415 as u128),
 			],
 		),
 
