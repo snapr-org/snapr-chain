@@ -84,3 +84,5 @@ jobs:
         with:
           files: |
             target/release/snapr_${{ steps.parse_tag.outputs.result }}-x86_64-linux-gnu
+            assets/chain_spec_mainnet.json
+            assets/chain_spec_testnet.json
